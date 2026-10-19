@@ -1,0 +1,11 @@
+---
+import site from '../data/site.json';
+const token = site.cloudflare_token?.trim();
+---
+{token && (
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={`{"token": "${token}"}`}
+  ></script>
+)}

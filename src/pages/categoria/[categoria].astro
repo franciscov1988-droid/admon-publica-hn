@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { categoriaSlug, url } from '../../utils';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('posts')).filter((p) => !p.data.borrador);
+  const categorias = [...new Set(posts.map((p) => p.data.categoria))];
+  return categorias.map((cat) => ({
+    params: { categoria: categoriaSlug(cat) },
+    props: {
+      nombre: cat,
+      posts: posts
+        .filter((p) => p.data.categoria === cat)
+        .sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf()),
+    },
+  }));
+}
+
+const { nombre, posts } = Astro.props;
+const descripciones = {
+  'Opiniones': 'Columnas y reflexiones sobre el quehacer de la administración pública.',
+  'Políticas públicas': 'Análisis del ciclo de las políticas públicas y la gestión del Estado.',
+};
+---
+<BaseLayout titulo={nombre} descripcion={descripciones[nombre]}>
+  <div class="contenedor cat">
+    <header class="cat__header">
+      <a class="cat__volver" href={url('/')}>← Inicio</a>
+      <h1>{nombre}</h1>
+      <p>{descripciones[nombre]}</p>
+      <span class="cat__conteo">{posts.length} {posts.length === 1 ? 'publicación' : 'publicaciones'}</span>
+    </header>
+
+    <div class="grilla grilla--3">
+      {posts.map((p) => <PostCard post={p} />)}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .cat { padding: 2.6rem 0 1rem; }
+  .cat__header { max-width: var(--ancho-texto); margin-bottom: 2.2rem; }
+  .cat__volver { font-weight: 600; font-size: .9rem; }
+  .cat__header h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: .6rem 0 .3rem; }
+  .cat__header p { color: var(--texto-tenue); font-size: 1.05rem; margin: 0 0 .6rem; }
+  .cat__conteo { font-size: .82rem; font-weight: 600; color: var(--azul-700); background: var(--azul-050); padding: .3rem .7rem; border-radius: 999px; }
+</style>

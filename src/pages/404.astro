@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../utils';
+---
+<BaseLayout titulo="Página no encontrada">
+  <div class="contenedor e404">
+    <span class="e404__num">404</span>
+    <h1>No encontramos esta página</h1>
+    <p>Es posible que el enlace haya cambiado o que la publicación ya no exista.</p>
+    <a class="boton" href={url('/')}>Volver al inicio</a>
+  </div>
+</BaseLayout>
+<style>
+  .e404 { text-align: center; padding: 5rem 0; }
+  .e404__num { font-family: var(--serif); font-size: 5rem; color: var(--oro-500); font-weight: 600; line-height: 1; }
+  .e404 h1 { margin: .5rem 0; }
+  .e404 p { color: var(--texto-tenue); margin: 0 0 1.5rem; }
+</style>

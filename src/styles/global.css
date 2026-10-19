@@ -1,0 +1,144 @@
+/* ============================================================
+   Administración Pública HN — Sistema de diseño
+   Paleta institucional: azul marino + dorado (del logo)
+   ============================================================ */
+
+:root {
+  /* Marca */
+  --azul-900: #0d2140;
+  --azul-800: #15325e;
+  --azul-700: #1d4078;
+  --azul-600: #275a9e;
+  --azul-050: #eef3fa;
+
+  --oro-700: #9a6f12;
+  --oro-600: #c0921c;
+  --oro-500: #d4a62a;
+  --oro-100: #f5ead0;
+
+  /* Neutros */
+  --tinta: #1b2330;
+  --tinta-suave: #4a5568;
+  --gris-linea: #e4e8ee;
+  --papel: #ffffff;
+  --papel-2: #f7f9fc;
+  --papel-3: #eef2f7;
+
+  /* Semánticos */
+  --fondo: var(--papel-2);
+  --texto: var(--tinta);
+  --texto-tenue: var(--tinta-suave);
+  --primario: var(--azul-800);
+  --acento: var(--oro-600);
+  --borde: var(--gris-linea);
+
+  /* Tipografía */
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Medidas */
+  --ancho: 1120px;
+  --ancho-texto: 720px;
+  --radio: 14px;
+  --radio-sm: 9px;
+  --sombra: 0 1px 2px rgba(13, 33, 64, .04), 0 10px 30px -12px rgba(13, 33, 64, .18);
+  --sombra-sm: 0 1px 2px rgba(13, 33, 64, .05), 0 4px 14px -8px rgba(13, 33, 64, .18);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--azul-700); text-decoration: none; transition: color .15s ease; }
+a:hover { color: var(--acento); }
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--azul-900);
+  letter-spacing: -.01em;
+  margin: 0 0 .5em;
+}
+
+.contenedor { width: min(100% - 2.4rem, var(--ancho)); margin-inline: auto; }
+
+.boton {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--primario); color: #fff;
+  font-family: var(--sans); font-weight: 600; font-size: .95rem;
+  padding: .72rem 1.3rem; border-radius: 999px; border: 0;
+  cursor: pointer; transition: transform .12s ease, background .2s ease, box-shadow .2s ease;
+  box-shadow: var(--sombra-sm);
+}
+.boton:hover { background: var(--azul-900); color: #fff; transform: translateY(-1px); }
+.boton--oro { background: var(--acento); color: var(--azul-900); }
+.boton--oro:hover { background: var(--oro-500); color: var(--azul-900); }
+.boton--fantasma { background: transparent; color: var(--azul-800); border: 1.5px solid var(--borde); box-shadow: none; }
+.boton--fantasma:hover { border-color: var(--acento); color: var(--acento); background: #fff; }
+
+/* Etiquetas de categoría */
+.etiqueta {
+  display: inline-flex; align-items: center;
+  font-family: var(--sans); font-weight: 700; font-size: .68rem;
+  letter-spacing: .09em; text-transform: uppercase;
+  color: var(--azul-700); background: var(--azul-050);
+  padding: .3rem .66rem; border-radius: 999px;
+}
+.etiqueta--oro { color: var(--oro-700); background: var(--oro-100); }
+
+/* Encabezado de sección */
+.seccion-titulo {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; margin: 0 0 1.4rem; padding-bottom: .7rem;
+  border-bottom: 2px solid var(--borde);
+}
+.seccion-titulo h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 0; }
+.seccion-titulo h2::before {
+  content: ""; display: inline-block; width: .55rem; height: 1.05em;
+  background: var(--acento); border-radius: 3px; margin-right: .6rem;
+  transform: translateY(.12em);
+}
+.seccion-titulo a { font-family: var(--sans); font-weight: 600; font-size: .9rem; white-space: nowrap; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* Utilidades de grilla */
+.grilla { display: grid; gap: 1.6rem; }
+@media (min-width: 640px) { .grilla--2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .grilla--3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* ===== Prosa (cuerpo de artículos) ===== */
+.prosa { font-size: 1.08rem; line-height: 1.78; color: #26303f; }
+.prosa > * + * { margin-top: 1.15rem; }
+.prosa p { margin: 0; }
+.prosa h2 { font-size: 1.6rem; margin: 2.2rem 0 .3rem; }
+.prosa h3 { font-size: 1.3rem; margin: 1.8rem 0 .3rem; }
+.prosa a { text-decoration: underline; text-underline-offset: 2px; }
+.prosa img { border-radius: var(--radio); margin: 1.6rem auto; box-shadow: var(--sombra-sm); }
+.prosa ol, .prosa ul { padding-left: 1.3rem; margin: 1.1rem 0; }
+.prosa li { margin: .4rem 0; }
+.prosa blockquote {
+  margin: 1.6rem 0; padding: .9rem 1.4rem; border-left: 4px solid var(--acento);
+  background: var(--papel-3); border-radius: 0 var(--radio-sm) var(--radio-sm) 0;
+  font-family: var(--serif); font-size: 1.15rem; color: var(--azul-900); font-style: italic;
+}
+.prosa blockquote p { margin: 0; }
+.prosa strong { color: var(--azul-900); }
+.prosa hr { border: 0; border-top: 1px solid var(--borde); margin: 2.2rem 0; }

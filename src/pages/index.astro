@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FrasesSlider from '../components/FrasesSlider.astro';
+import PostCard from '../components/PostCard.astro';
+import Suscripcion from '../components/Suscripcion.astro';
+import site from '../data/site.json';
+import { url } from '../utils';
+
+const posts = (await getCollection('posts'))
+  .filter((p) => !p.data.borrador)
+  .sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf());
+
+const destacado = posts.find((p) => p.data.destacado) ?? posts[0];
+const recientes = posts.filter((p) => p.id !== destacado?.id).slice(0, 6);
+---
+<BaseLayout>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__bg" style={`background-image:url('${url('/images/banner.jpg')}')`}></div>
+    <div class="hero__velo"></div>
+    <div class="contenedor hero__inner">
+      <span class="hero__kicker">Honduras · Gestión y políticas públicas</span>
+      <h1>Administración Pública HN</h1>
+      <p>{site.descripcion}</p>
+      <div class="hero__cta">
+        <a class="boton boton--oro" href={url('/archivo')}>Ver publicaciones</a>
+        <a class="boton boton--fantasma hero__fb" href={site.facebook} target="_blank" rel="noopener">Síguenos en Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <FrasesSlider />
+
+  <div class="contenedor bloque">
+    {destacado && (
+      <section class="destacado">
+        <div class="seccion-titulo"><h2>Publicación destacada</h2></div>
+        <PostCard post={destacado} destacar={true} />
+      </section>
+    )}
+
+    <section class="recientes">
+      <div class="seccion-titulo">
+        <h2>Lo más reciente</h2>
+        <a href={url('/archivo')}>Ver el archivo →</a>
+      </div>
+      <div class="grilla grilla--3">
+        {recientes.map((p) => <PostCard post={p} />)}
+      </div>
+    </section>
+
+    <section class="susc-bloque">
+      <Suscripcion />
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero { position: relative; color: #fff; overflow: hidden; }
+  .hero__bg {
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    transform: scale(1.03);
+  }
+  .hero__velo {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(13,33,64,.93) 0%, rgba(13,33,64,.78) 45%, rgba(21,50,94,.55) 100%);
+  }
+  .hero__inner { position: relative; padding: clamp(3.2rem, 8vw, 6rem) 0; max-width: 680px; }
+  .hero__kicker {
+    display: inline-block; font-weight: 700; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--oro-500); background: rgba(212,166,42,.12); border: 1px solid rgba(212,166,42,.4);
+    padding: .4rem .8rem; border-radius: 999px; margin-bottom: 1rem;
+  }
+  .hero h1 { color: #fff; font-size: clamp(2.3rem, 6vw, 3.6rem); margin: 0 0 .6rem; }
+  .hero p { color: rgba(255,255,255,.88); font-size: clamp(1rem, 2.4vw, 1.2rem); max-width: 54ch; margin: 0 0 1.6rem; }
+  .hero__cta { display: flex; gap: .8rem; flex-wrap: wrap; }
+  .hero__fb { color: #fff; border-color: rgba(255,255,255,.4); }
+  .hero__fb:hover { color: var(--oro-100); border-color: var(--oro-500); background: rgba(255,255,255,.06); }
+
+  .bloque { padding-top: 3rem; }
+  .destacado { margin-bottom: 3.2rem; }
+  .recientes { margin-bottom: 3.5rem; }
+  .susc-bloque { margin-bottom: 1rem; }
+</style>

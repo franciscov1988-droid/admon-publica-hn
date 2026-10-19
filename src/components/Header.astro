@@ -1,0 +1,111 @@
+---
+import site from '../data/site.json';
+import { url } from '../utils';
+
+const nav = [
+  { label: 'Inicio', href: url('/') },
+  { label: 'Opiniones', href: url('/categoria/opiniones') },
+  { label: 'Políticas públicas', href: url('/categoria/politicas-publicas') },
+  { label: 'Archivo', href: url('/archivo') },
+  { label: 'Acerca de', href: url('/acerca') },
+];
+---
+
+<header class="cabecera">
+  <div class="contenedor cabecera__fila">
+    <a class="marca" href={url('/')}>
+      <img src={url('/images/logo.jpg')} alt="Logo de Administración Pública HN" width="54" height="54" />
+      <span class="marca__texto">
+        <strong>Administración Pública HN</strong>
+        <small>{site.lema}</small>
+      </span>
+    </a>
+
+    <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" data-menu-btn>
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" data-menu>
+      <ul>
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+      <a class="nav__fb" href={site.facebook} target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+          <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z"/>
+        </svg>
+        <span>Facebook</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .cabecera {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--borde);
+  }
+  .cabecera__fila { display: flex; align-items: center; gap: 1rem; min-height: 72px; }
+
+  .marca { display: flex; align-items: center; gap: .7rem; flex: 1 1 auto; min-width: 0; }
+  .marca img { border-radius: 50%; box-shadow: var(--sombra-sm); }
+  .marca__texto { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+  .marca__texto strong { font-family: var(--serif); color: var(--azul-900); font-size: 1.08rem; }
+  .marca__texto small { color: var(--texto-tenue); font-size: .74rem; }
+
+  .nav { display: flex; align-items: center; gap: 1.4rem; }
+  .nav ul { display: flex; align-items: center; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+  .nav a {
+    font-weight: 600; font-size: .95rem; color: var(--azul-900);
+    padding: .4rem 0; position: relative;
+  }
+  .nav ul a::after {
+    content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+    background: var(--acento); transition: width .2s ease;
+  }
+  .nav ul a:hover { color: var(--azul-700); }
+  .nav ul a:hover::after { width: 100%; }
+
+  .nav__fb {
+    display: inline-flex; align-items: center; gap: .45rem;
+    background: var(--azul-800); color: #fff; font-weight: 600; font-size: .88rem;
+    padding: .5rem .85rem; border-radius: 999px;
+  }
+  .nav__fb:hover { background: var(--azul-900); color: #fff; }
+
+  .menu-btn {
+    display: none; flex-direction: column; gap: 5px; background: none; border: 0;
+    padding: .4rem; cursor: pointer;
+  }
+  .menu-btn span { width: 24px; height: 2.5px; background: var(--azul-900); border-radius: 2px; transition: .25s; }
+  .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  @media (max-width: 860px) {
+    .marca__texto small { display: none; }
+    .menu-btn { display: flex; }
+    .nav {
+      position: fixed; inset: 72px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0;
+      background: #fff; border-bottom: 1px solid var(--borde);
+      padding: .5rem 1.2rem 1.2rem; box-shadow: var(--sombra);
+      transform: translateY(-120%); transition: transform .28s ease; visibility: hidden;
+    }
+    .nav[data-open] { transform: translateY(0); visibility: visible; }
+    .nav ul { flex-direction: column; align-items: stretch; gap: 0; }
+    .nav ul li { border-bottom: 1px solid var(--borde); }
+    .nav ul a { display: block; padding: .9rem .2rem; }
+    .nav__fb { margin-top: 1rem; justify-content: center; }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector('[data-menu-btn]');
+  const nav = document.querySelector('[data-menu]');
+  btn?.addEventListener('click', () => {
+    const open = nav?.hasAttribute('data-open');
+    if (open) { nav?.removeAttribute('data-open'); btn.setAttribute('aria-expanded', 'false'); }
+    else { nav?.setAttribute('data-open', ''); btn.setAttribute('aria-expanded', 'true'); }
+  });
+</script>
