@@ -1,0 +1,71 @@
+# ===========================================================================
+#  Configuración del CMS (PagesCMS · https://pagescms.org)
+#  Editor web para crear y editar entradas sin tocar código.
+#  Cómo usarlo: entra a https://app.pagescms.org, inicia sesión con GitHub,
+#  autoriza este repositorio y edita. Cada cambio se guarda como un commit
+#  y el sitio se vuelve a publicar solo (GitHub Actions).
+# ===========================================================================
+
+media:
+  - name: imagenes
+    label: Imágenes
+    input: public/images
+    output: /admon-publica-hn/images
+    extensions: [jpg, jpeg, png, webp, gif, svg]
+
+content:
+  # ---- Publicaciones del blog --------------------------------------------
+  - name: posts
+    label: Publicaciones
+    type: collection
+    path: src/content/posts
+    filename: '{fields.titulo}.md'
+    view:
+      fields: [titulo, categoria, fecha, borrador]
+      sort: [fecha, titulo]
+      default:
+        sort: fecha
+        order: desc
+    fields:
+      - { name: titulo, label: Título, type: string, required: true }
+      - { name: descripcion, label: Resumen (sale en las tarjetas y en redes), type: text }
+      - { name: fecha, label: Fecha, type: date, required: true, options: { format: yyyy-MM-dd } }
+      - name: categoria
+        label: Categoría
+        type: select
+        default: Opiniones
+        options:
+          values: [Opiniones, Políticas públicas]
+      - { name: autor, label: Autor, type: string, default: 'Administración Pública HN' }
+      - { name: portada, label: 'Portada (sube una imagen o pega una URL)', type: string }
+      - { name: destacado, label: '¿Destacada en la portada?', type: boolean, default: false }
+      - { name: borrador, label: '¿Borrador? (no se publica)', type: boolean, default: false }
+      - { name: body, label: Contenido, type: rich-text }
+
+  # ---- Frases del slider -------------------------------------------------
+  - name: frases
+    label: Frases del slider
+    type: file
+    path: src/data/frases.json
+    fields:
+      - name: frases
+        label: Frases
+        type: list
+        fields:
+          - { name: texto, label: Frase, type: text, required: true }
+          - { name: autor, label: 'Autor / Fuente', type: string }
+
+  # ---- Ajustes del sitio -------------------------------------------------
+  - name: ajustes
+    label: Ajustes del sitio
+    type: file
+    path: src/data/site.json
+    fields:
+      - { name: nombre, label: Nombre del sitio, type: string }
+      - { name: lema, label: Lema, type: string }
+      - { name: descripcion, label: 'Descripción (SEO)', type: text }
+      - { name: facebook, label: URL de Facebook, type: string }
+      - { name: correo, label: Correo de contacto, type: string }
+      - { name: cloudflare_token, label: 'Token de Cloudflare Web Analytics', type: string }
+      - { name: suscripcion_url, label: 'URL de suscripción (follow.it)', type: string }
+      - { name: suscripcion_form, label: 'URL del formulario de suscripción', type: string }
