@@ -34,6 +34,8 @@ const imagenAbs = new URL(imagen, Astro.site).href;
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descripcion} />
     <meta property="og:image" content={imagenAbs} />
+    <meta property="og:image:secure_url" content={imagenAbs} />
+    <meta property="og:image:alt" content={titulo ?? site.nombre} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="es_HN" />
     <meta name="twitter:card" content="summary_large_image" />

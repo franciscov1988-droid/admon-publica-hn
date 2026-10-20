@@ -4,7 +4,7 @@ descripcion: "Más allá de lamentar el atraso en materia de TIC, debemos ver la
 fecha: 2020-05-27
 categoria: "Opiniones"
 autor: "Alejandro Rivera Camero"
-portada: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCjKgxgzG_ie46vAAkKu2LVlw0n2RKAqrLqk3knXRREN3cYIArRkkAvOLMteYMUIzu63q_bwPouxSb5khGDrG5S2uGCk1svsCZt4abmqOJxa1sxCrp_aUKBCrWDC-EIOSOZlYqHEvlkpg/s320/Gobierno-corporativo-en-la-era-igital.jpg"
+portada: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCjKgxgzG_ie46vAAkKu2LVlw0n2RKAqrLqk3knXRREN3cYIArRkkAvOLMteYMUIzu63q_bwPouxSb5khGDrG5S2uGCk1svsCZt4abmqOJxa1sxCrp_aUKBCrWDC-EIOSOZlYqHEvlkpg/s1600/Gobierno-corporativo-en-la-era-igital.jpg"
 ---
 
 *Más allá de lamentar el atraso en materia de TIC, debemos ver la situación como una oportunidad para replantear los actuales modelos.*

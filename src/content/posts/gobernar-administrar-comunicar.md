@@ -4,7 +4,7 @@ descripcion: "El buen gobierno no es atributo de una persona: es la variable dep
 fecha: 2020-05-08
 categoria: "Opiniones"
 autor: "Administración Pública HN"
-portada: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_9hJ4-kEm0Tr5UNdTr_bF0OABa6D5Erhb8tfjHT2C3ZMvc4yYg-tctGkTMnz76o_hqELJiA7pHkTSt7YmCf3OzRt-70Z9qqw6V-WJMJoaioLYaclOA640tUWpwAY48XjgQVzxwYmLAj0/s320/Admon.png"
+portada: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_9hJ4-kEm0Tr5UNdTr_bF0OABa6D5Erhb8tfjHT2C3ZMvc4yYg-tctGkTMnz76o_hqELJiA7pHkTSt7YmCf3OzRt-70Z9qqw6V-WJMJoaioLYaclOA640tUWpwAY48XjgQVzxwYmLAj0/s1600/Admon.png"
 ---
 
 Gobernar es una cosa, administrar otra y hablar al público es otra distinta. Uno de los problemas que tenemos en la forma de percibir y calificar el desempeño de nuestros gobernantes se relaciona con la confusión que puede haber en estos tres conceptos. Ocurre que, en las campañas electorales, las candidaturas representan ofertas políticas que se tratan de moldear como soluciones ante las demandas de una atribulada realidad social. Ya en funciones, las y los gobernantes demuestran su capacidad política y de gestión —o la ausencia de ella—, ante un contexto social e institucional que frecuentemente presenta desafíos que rebasan la capacidad individual para salir del paso. El buen gobierno no es atributo de una persona, sino que parece ser la variable dependiente de una compleja interconexión de actores, instituciones, recursos y decisiones que funcionan en un ambiente donde nadie tiene control pleno de todos los factores que definen la realidad.
